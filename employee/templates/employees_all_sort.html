@@ -1,0 +1,74 @@
+<div id="div_sort">
+
+    <div class="rgba-black-strong py-0 px-4">
+      <div class="row d-flex justify-content-center">
+        <div class="col-md-10 col-xl-8">
+          <div class="card mb-4">
+            <div class="card-header p-0 z-depth-1">
+                <div class="d-table"><div id="div_sort">
+                    {% for employee in employees %}
+                        <div class="d-table">
+                            <div class="d-tr">
+                                <div class="d-td" style="width:35%"><h4><a href="{% url 'edit' id=employee.id %}">{{ employee.name }}</a></h4></div>
+                                <div class="d-td" style="width:15%"><h4>{{ employee.employment_position }}</h4></div>
+                                <div class="d-td" style="width:15%"><h4>{{ employee.employment_start_date|date:'Y.M.d' }}</h4></div>
+                                <div class="d-td" style="width:15%"><h4>{{ employee.salary }}</h4></div>
+                                <div class="d-td" style="width:10%"><img src={{ employee.employment_photo.url }} alt="Avatar" class="fancybox" rel="{{ employee.name }}" href="{{ employee.employment_photo.url }}" onload="imgLoaded(this)"/></div>
+                                <div class="d-td" style="width:10%"><a href="{% url 'delete' id=employee.id %}"><h4>DELETE</h4></a></div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+
+
+
+<div class="pagination" style="text-align: center; font-size: 20px">
+    <div class="d-td" style="width:100%">
+    {% with employees.paginator.num_pages as num_pages %}
+
+    {% if employees.has_previous %}
+        <div class="previous" onclick="num_down()">&laquo; Previos</div>
+    {% endif %}
+
+    {% for num in employees.paginator.page_range %}
+        {% if employees.number|add:'-3' == num %}
+          {# First page #}
+            <a href="?page=1">1</a>
+            {% if num != 1 %}
+              <a>&#8943;</a>
+            {% endif %}
+        {% elif num == employees.number %}
+          {# Current page #}
+              <span class="current"><b>{{ num }}</b></span>
+        {% elif employees.number|add:'-3' < num and num < employees.number|add:'3' %}
+          {# Pages around current page #}
+              {{ num }}
+        {% elif employees.number|add:'3' == num %}
+          {# Last page #}
+              {% if num != num_pages %}
+                  <a>&#8943;</a>
+              {% endif %}
+              {{ num_pages }}
+          {% endif %}
+        {% endfor %}
+
+      {% if employees.has_next %}
+          <div class="next" onclick="num_up()">Next &raquo</div>
+      {% endif %}
+
+    {% endwith %}
+    </div>
+</div>
+
+</div>

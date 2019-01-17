@@ -1,0 +1,11 @@
+{% load mptt_tags %}
+  {% recursetree employees %}
+    <li class="dd-item" id="{{ node.id }}">
+        <div class="dd-handle" id="div{{ node.id }}">{{ node.name }}, Position - {{ node.employment_position }}, Salary - {{ node.salary }}</div>
+          {% if not node.is_leaf_node %}
+            <ol class="children">
+                {{ children }}
+            </ol>
+          {% endif %}
+    </li>
+  {% endrecursetree %}
