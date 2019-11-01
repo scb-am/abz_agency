@@ -1,5 +1,5 @@
 Django==2.1
 django-js-asset==1.2.2
 django-mptt==0.9.1
-Pillow==6.1.0
+Pillow==6.2.0
 pytz==2019.1
