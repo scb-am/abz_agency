@@ -1,4 +1,4 @@
-Django==2.1.11
+Django==2.2.24
 django-js-asset==1.2.2
 django-mptt==0.9.1
 Pillow==6.2.0
